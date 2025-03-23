@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - INNOVATEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2C3930;
+            --secondary: #3F4F44;
+            --accent: #A27B5C;
+            --light: #DCD7C9;
+            --dark: #212121;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 50%, var(--light) 0%, #E0E0E0 100%);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .logo {
+            color: var(--light);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            width: 90%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--secondary);
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-picture input {
+            display: none;
+        }
+
+        .profile-picture label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--secondary);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #8b6245;
+        }
+
+        .profile-info {
+            margin-top: 2rem;
+        }
+
+        .profile-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .profile-info p {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">INNOVATEX</div>
+        <div id="profilePhotoContainer" style="display: none;">
+            <img id="headerProfilePhoto" src="" alt="Profile Photo" style="width: 40px; height: 40px; border-radius: 50%;">
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>Complete Your Profile</h2>
+            <div class="profile-picture">
+                <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile Picture">
+                <input type="file" id="uploadPhoto" accept="image/*">
+                <label for="uploadPhoto">Upload Photo</label>
+            </div>
+        </div>
+
+        <!-- Form with action pointing to UseBasin -->
+        <form id="profileForm" action="https://usebasin.com/f/d4ea1d563df6" method="POST">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio" placeholder="Tell us about yourself..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="graduation">Graduation</label>
+                <input type="text" id="graduation" name="graduation" required>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <textarea id="skills" name="skills" placeholder="Enter your skills..."></textarea>
+            </div>
+
+            <button type="submit">Save Profile</button>
+        </form>
+
+        <div class="profile-info" id="profileInfo" style="display: none;">
+            <h3>Profile Information</h3>
+            <p><strong>Name:</strong> <span id="displayName"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Bio:</strong> <span id="displayBio"></span></p>
+            <p><strong>Graduation:</strong> <span id="displayGraduation"></span></p>
+            <p><strong>Skills:</strong> <span id="displaySkills"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Handle profile picture upload
+        const uploadPhoto = document.getElementById('uploadPhoto');
+        const profileImage = document.getElementById('profileImage');
+        const headerProfilePhoto = document.getElementById('headerProfilePhoto');
+        const profilePhotoContainer = document.getElementById('profilePhotoContainer');
+
+        uploadPhoto.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profileImage.src = e.target.result;
+                    headerProfilePhoto.src = e.target.result; // Update header photo
+                    profilePhotoContainer.style.display = 'block'; // Show profile photo in header
+                    localStorage.setItem('profilePhoto', e.target.result); // Save to localStorage
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle form submission
+        const profileForm = document.getElementById('profileForm');
+
+        profileForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Collect form data
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const bio = document.getElementById('bio').value;
+            const graduation = document.getElementById('graduation').value;
+            const skills = document.getElementById('skills').value;
+            const profilePhoto = profileImage.src;
+
+            // Save data to localStorage
+            localStorage.setItem('profileName', fullname);
+            localStorage.setItem('profileEmail', email);
+            localStorage.setItem('profileBio', bio);
+            localStorage.setItem('profileGraduation', graduation);
+            localStorage.setItem('profileSkills', skills);
+            localStorage.setItem('profilePhoto', profilePhoto);
+
+            // Submit the form to UseBasin
+            const formData = new FormData(profileForm);
+
+            try {
+                const response = await fetch(profileForm.action, {
+                    method: profileForm.method,
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    alert('Profile saved successfully!');
+                    window.location.href = 'index.html'; // Redirect to index page
+                } else {
+                    alert('Failed to save profile. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        // Load saved profile data on page load
+        window.addEventListener('load', () => {
+            const savedName = localStorage.getItem('profileName');
+            const savedEmail = localStorage.getItem('profileEmail');
+            const savedBio = localStorage.getItem('profileBio');
+            const savedGraduation = localStorage.getItem('profileGraduation');
+            const savedSkills = localStorage.getItem('profileSkills');
+            const savedPhoto = localStorage.getItem('profilePhoto');
+
+            if (savedName) {
+                document.getElementById('fullname').value = savedName;
+            }
+            if (savedEmail) {
+                document.getElementById('email').value = savedEmail;
+            }
+            if (savedBio) {
+                document.getElementById('bio').value = savedBio;
+            }
+            if (savedGraduation) {
+                document.getElementById('graduation').value = savedGraduation;
+            }
+            if (savedSkills) {
+                document.getElementById('skills').value = savedSkills;
+            }
+            if (savedPhoto) {
+                profileImage.src = savedPhoto;
+                headerProfilePhoto.src = savedPhoto;
+                profilePhotoContainer.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

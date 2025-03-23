@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Services | InnovateX</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #363d1e;
+      --accent-color: #E6B800;
+      --light-bg: #363d1e;
+      --text-light: #e5e6ed;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #80a40b32 0%, #9ec91339 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Header */
+    nav {
+      background: var(--primary-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 15px rgba(10, 38, 71, 0.1);
+    }
+
+    .logo {
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .cta-button {
+      background: var(--accent-color);
+      color: var(--primary-color) !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 12px rgba(230, 184, 0, 0.3);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 3rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gateway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 250px);
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .gateway-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(10, 38, 71, 0.08);
+      border: 1px solid #E0E3E7;
+      text-decoration: none;
+      color: inherit;
+      width: 250px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gateway-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(10, 38, 71, 0.15);
+      background: var(--primary-color);
+    }
+
+    .gateway-card:hover * {
+      color: white !important;
+    }
+
+    .legal-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .gateway-card:hover .legal-icon {
+      color: var(--accent-color);
+      transform: scale(1.1);
+    }
+
+    .gateway-card h3 {
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin: 0.5rem 0;
+    }
+
+    .gateway-card p {
+      color: #6B7280;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      padding: 0 1rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      background: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      border-top: 2px solid var(--accent-color);
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+      .gateway-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .gateway-card {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">INNOVATEX</div>
+    <a href="private-jobs.html" class="cta-button">Go Back</a>
+  </nav>
+
+  <!-- Legal Services -->
+  <main>
+    <div class="gateway-grid">
+      <a href="input.html" class="gateway-card">
+        <i class="fas fa-balance-scale legal-icon"></i>
+        <h3>Civil Law</h3>
+        <p>Expert legal solutions for personal and family matters</p>
+      </a>
+
+      <a href="input.html" class="gateway-card">
+        <i class="fas fa-file-contract legal-icon"></i>
+        <h3>Notary Services</h3>
+        <p>Official document authentication and certification</p>
+      </a>
+
+      <a href="input.html" class="gateway-card">
+        <i class="fas fa-gavel legal-icon"></i>
+        <h3>Corporate Law</h3>
+        <p>Business legal structuring and compliance management</p>
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2023 InnovateX. <a href="#">Privacy</a> | <a href="#">Terms</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

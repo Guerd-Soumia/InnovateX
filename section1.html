@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section 1 - InnovateX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Modern Theme with Updated Color Palette */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #DCD7C9;
+      color: #2C3930;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #2C3930;
+      color: #DCD7C9;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Logo Styling */
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #E9C46A;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: #DCD7C9;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+    }
+    nav ul li a:hover {
+      color: #A27B5C;
+      transform: translateY(-3px);
+    }
+    .cta-button {
+      background-color: #3F4F44;
+      color: #DCD7C9;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+    }
+    .cta-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Section 1 - Categories */
+    .section1 {
+      padding: 4rem 1rem;
+      text-align: center;
+      background-color: #3f4f44ab;
+    }
+    .section1 h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #2C3930;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .category-card {
+      background-color: rgba(255, 255, 255, 0.573);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      height: 250px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .category-card i {
+      font-size: 2.5rem;
+      color: #2C3930;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    .category-card:hover i {
+      transform: rotate(360deg);
+    }
+    .category-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #2C3930;
+      transition: all 0.3s ease;
+    }
+    .category-card p {
+      font-size: 1rem;
+      color: #2C3930;
+      opacity: 0;
+      transition: all 0.3s ease;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+    }
+    .category-card:hover p {
+      opacity: 1;
+    }
+    .category-card:hover h3 {
+      opacity: 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2C3930;
+      color: #DCD7C9;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #3F4F44, #2C3930);
+      opacity: 0.1;
+      z-index: 1;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+    footer ul li a {
+      color: #DCD7C9;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    footer ul li a:hover {
+      color: #E9C46A;
+      transform: translateY(-3px);
+    }
+    footer p {
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .section1 h2 {
+        font-size: 2rem;
+      }
+      .categories {
+        flex-direction: column;
+        align-items: center;
+      }
+      .category-card {
+        width: 90%;
+        max-width: 250px;
+        height: 250px;
+      }
+      footer ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">INNOVATEX</div>
+    <ul></ul>
+    <div><a href="index.html" class="cta-button">HOME</a></div>
+  </nav>
+
+  <!-- Section 1 - Categories -->
+  <section class="section1">
+    <h2>InnovateX Opportunities</h2>
+    <div class="categories">
+      <a href="search-jobs.html" class="category-card"><i class="fas fa-briefcase"></i><h3>Search for Jobs</h3></a>
+      <a href="search-investors.html" class="category-card"><i class="fas fa-hand-holding-heart"></i><h3>Search for Investors</h3></a>
+      <a href="invest-projects.html" class="category-card"><i class="fas fa-globe"></i><h3>Invest in Projects</h3></a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="term.html">Terms of Service</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="QandA.html">Q&A</a></li>
+    </ul>
+    <p>&copy; 2025 InnovateX. All rights reserved.</p>
+  </footer>
+</body>
+</html>

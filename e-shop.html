@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovateX - E-Shop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background-color: #2c3e50;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    nav .logo {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .basket-icon {
+      position: relative;
+      cursor: pointer;
+    }
+    .basket-icon i {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    .basket-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+    }
+
+    /* Go Back Button */
+    .go-back-button {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .go-back-button:hover {
+      color: #2980b9;
+    }
+
+    /* Filter and Search Section */
+    .filter-section {
+      padding: 1rem;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .filter-section select, .filter-section input {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+    .search-container {
+      position: relative;
+    }
+    .search-container i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+    .search-container input {
+      padding-left: 30px;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Product Box */
+    .product-box {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    .product-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+    .product-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .product-box h3 {
+      font-size: 1rem;
+      margin: 0;
+      color: #2c3e50;
+    }
+    .product-box p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0.5rem 0;
+    }
+    .product-box button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .product-box button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.875rem;
+    }
+
+    /* Flying Product Animation */
+    .flying-product {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+      z-index: 1000;
+      animation: flyToBasket 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes flyToBasket {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(0.8) translateY(-50px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(0.3) translate(calc(100vw - 150px), -100px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <!-- Go Back Button -->
+    <button class="go-back-button" onclick="window.location.href='section3.html'">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="logo">InnovateX</div>
+    <div class="basket-icon" onclick="window.location.href='basket.html'">
+      <i class="fas fa-shopping-basket"></i>
+      <span class="basket-count" id="basketCount">0</span>
+    </div>
+  </nav>
+
+  <!-- Filter and Search Section -->
+  <div class="filter-section">
+    <select id="categoryFilter">
+      <option value="">All Categories</option>
+      <option value="Software/Hardware Development">Software/Hardware Development</option>
+      <option value="Culinary Arts">Culinary Arts</option>
+      <option value="Healthcare Innovation">Healthcare Innovation</option>
+      <option value="Science Research">Science Research</option>
+      <option value="Financial Management">Financial Management</option>
+      <option value="Legal Services">Legal Services</option>
+      <option value="Électroménager">Électroménager</option>
+      <option value="Language Studies">Language Studies</option>
+      <option value="Travel & Tourism">Travel & Tourism</option>
+      <option value="Hospitality Management">Hospitality Management</option>
+      <option value="Architectural Design">Architectural Design</option>
+      <option value="Facility Services">Facility Services</option>
+    </select>
+    <select id="priceSort">
+      <option value="">Sort by Price</option>
+      <option value="lowToHigh">Low to High</option>
+      <option value="highToLow">High to Low</option>
+    </select>
+    <div class="search-container">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchBox" placeholder="Search products...">
+    </div>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" id="productGrid">
+    <!-- Products will be dynamically loaded here -->
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 InnovateX. All rights reserved.
+  </footer>
+
+  <script>
+    // Sample product data
+    const products = [
+      { id: 1, name: "DC Motors (12V)", price: 3000, category: "Software/Hardware Development", image: "DC Motors (12V).jfif" },
+      { id: 2, name: "L298N Motor Driver", price: 2000, category: "Software/Hardware Development", image: "dual motor.jfif" },
+      { id: 3, name: "Arduino Uno R4 Minima(Clone)", price: 4000, category: "Software/Hardware Development", image: "arduino2.jpg" },
+      { id: 4, name: "Jumper Wires", price: 500, category: "Software/Hardware Development", image: "Jumper Wires.jpg" },
+      { id: 5, name: "Bluetooth Module (HC-05)", price: 2500, category: "Software/Hardware Development", image: "Bluetooth Module (HC-05).jfif" },
+      { id: 6, name: "Ultrasonic Sensor (HC-SR04)", price: 1500, category: "Software/Hardware Development", image: "Ultrasonic Sensor (HC-SR04).jfif" },
+      { id: 7, name: "GPU NVIDIA GT 1030 Entry-Level gtx 1030 2gb", price: 35000, category: "Software/Hardware Development", image: "GPU NVIDIA GT 1030 Entry-Level gtx 1030 2gb.jfif" },
+      { id: 8, name: "Advanced Wi-Fi (ASUS PCE-AC68)", price: 15000, category: "Software/Hardware Development", image: "Advanced Wi-Fi Card.jfif" },
+      { id: 9, name: "Basic TV Tuner (Hauppauge WinTV-HVR-955Q)", price: 12000, category: "Software/Hardware Development", image: "Basic TV Tuned.jpg" },
+      { id: 10, name: "Chef Uniforms", price: 5000, category: "Culinary Arts", image: "chef uniform.jfif" },
+      { id: 11, name: "Waiter Uniforms", price: 95000, category: "Culinary Arts", image: "waiter.jpg" },
+      { id: 12, name: "Plates", price: 1500, category: "Culinary Arts", image: "plate.jfif" },
+      { id: 13, name: "Glasswares", price: 500, category: "Culinary Arts", image: "glass.jfif" },
+      { id: 14, name: "Serving Trays", price: 1500, category: "Culinary Arts", image: "trays.jfif" },
+      { id: 15, name: "Napkins", price: 500, category: "Culinary Arts", image: "napkins.jfif" },
+      { id: 16, name: "Fire Extinguisher", price: 25000, category: "Culinary Arts", image: "fire1.jfif" },
+      { id: 17, name: "Security Cameras", price: 35000, category: "Culinary Arts", image: "camer1.jfif" },
+      { id: 18, name: "Signage (Menu Boards, Outdoor Signs)", price: 12000, category: "Culinary Arts", image: "menu1.jpg" },
+      { id: 19, name: "First Aid Kit", price: 7000, category: "Healthcare Innovation", image: "fire2.jfif" },
+      { id: 20, name: "Great Oral Health Toothpaste", price: 500, category: "Healthcare Innovation", image: "tooth.jfif" },
+      { id: 21, name: "Pampers size S (22 Diapers)", price: 800, category: "Healthcare Innovation", image: "pamper.jfif" },
+      { id: 22, name: "Sunscreen venus 40 spf", price: 450, category: "Healthcare Innovation", image: "venus.jfif" },
+      { id: 23, name: "Hand Sanitizer", price: 300, category: "Healthcare Innovation", image: "hand.jfif" },
+      { id: 24, name: "Lip Balm labello", price: 750, category: "Healthcare Innovation", image: "labello.jfif" },
+      { id: 25, name: "Thermometer", price: 1000, category: "Healthcare Innovation", image: "ter.jfif" },
+      { id: 26, name: "Band-Aids/Plasters", price: 250, category: "Healthcare Innovation", image: "band.jfif" },
+      { id: 27, name: "Medical Mask", price: 120, category: "Healthcare Innovation", image: "mask.jfif" },
+      { id: 28, name: "pH Meter", price: 60000, category: "Science Research", image: "ph.jfif" },
+      { id: 29, name: "Centrifuge", price: 450000, category: "Science Research", image: "lab.jfif" },
+      { id: 30, name: "Incubators", price: 300000, category: "Science Research", image: "egg.jfif" },
+      { id: 31, name: "Microcentrifuge Tubes", price: 1000, category: "Science Research", image: "tube.jfif" },
+      { id: 32, name: "Pipettes and Tips", price: 1300, category: "Science Research", image: "pipette.jfif" },
+      { id: 33, name: "Petri Dishes", price: 900, category: "Science Research", image: "Petri Dishes1.jpg" },
+      { id: 34, name: "DNA/RNA Extraction Kits", price: 35000, category: "Science Research", image: "dna1.jpg" },
+      { id: 35, name: "Spectrophotometer", price: 530000, category: "Science Research", image: "Spectrophotometer.jfif" },
+      { id: 36, name: "Lab Coats", price: 1200, category: "Science Research", image: "coat1.jfif" },
+      { id: 37, name: "Financial Calculator", price: 5000, category: "Financial Management", image: "calculator.jfif" },
+      { id: 38, name: "Financial Notebooks and Journals", price: 700, category: "Financial Management", image: "planner1.jpg" },
+      { id: 39, name: "Filing Cabinets", price: 9000, category: "Financial Management", image: "filing.jfif" },
+      { id: 40, name: "Cash Boxes and Safes", price: 24000, category: "Financial Management", image: "cash.jfif" },
+      { id: 41, name: "Receipt Books and Invoices", price: 600, category: "Financial Management", image: "Receipt Books and Invoices.jfif" },
+      { id: 42, name: "Budget Planners and Expense Tracker", price: 650, category: "Financial Management", image: "pl.jfif" },
+      { id: 43, name: "Envelopes for Cash Management", price: 150, category: "Financial Management", image: "Envelopes for Cash Management1.jfif" },
+      { id: 44, name: "Whiteboards and Corkboards", price: 3000, category: "Financial Management", image: "Whiteboards and Corkboards2.jfif" },
+      { id: 45, name: "Stamps and Ink Pads", price: 1450, category: "Financial Management", image: "Stamps and Ink Pads.jfif" },
+      { id: 46, name: "Notary Supplies", price: 2000, category: "Legal Services", image: "Notary Supplies.jfif" },
+      { id: 47, name: "Filing and Organization Tools", price: 17000, category: "Legal Services", image: "Filing and Organization Tools2.jpg" },
+      { id: 48, name: "Legal Document Bags", price: 5700, category: "Legal Services", image: "Legal Document Bags.jfif" },
+      { id: 49, name: "Lave-linge hublot posable Whirlpool - W6 W045SR FR", price: 80000, category: "Électroménager", image: "Lave-linge hublot posable Whirlpool - W6 W045SR FR.jfif" },
+      { id: 50, name: "LG GSLV91MBAC American Style Frost Free Fridge Freezer", price: 150000, category: "Électroménager", image: "LG GSLV91MBAC American Style Frost Free Fridge Freezer.webp" },
+      { id: 51, name: "TCL 12000 BTU Wall Mounted Air Conditioner with Heating Function", price: 70000, category: "Électroménager", image: "TCL 12000 BTU Wall Mounted Air Conditioner with Heating Function.jpg" },
+      { id: 52, name: "Cuisinière électrique LG Air Fry technologie InstaView 5 éléments 6,3 pi³ 30 po acier inoxydable", price: 195000, category: "Électroménager", image: "Cuisinière électrique LG Air Fry technologie InstaView 5 éléments 6,3 pi³ 30 po acier inoxydable.jpg" },
+      { id: 53, name: "Micro-ondes Combi Crisp Vapeur Supreme Chef - MWP 3391 SX", price: 71000, category: "Électroménager", image: "Micro-ondes Combi Crisp Vapeur Supreme Chef - MWP 3391 SX.webp" },
+      { id: 54, name: "Lave vaisselle Whirlpool WFO3O33DLX - 60 cm - Classe A+++ / 43 decibels", price: 125000, category: "Électroménager", image: "Lave vaisselle Whirlpool WFO3O33DLX - Lave vaisselle 60 cm.jpg" },
+      { id: 55, name: "Shark HydroVac MessMaster Self Cleaning Corded Vacuum, Black/Grey (Refurbished)", price: 35000, category: "Électroménager", image: "Shark HydroVac.webp" },
+      { id: 56, name: "Nutribullet NBJ50300 Slow Juicer- Refurbished", price: 25000, category: "Électroménager", image: "Nutribullet NBJ50300 Slow Juicer- Refurbished.jpg" },
+      { id: 57, name: "SAMSUNG 55 Inches Smart UHD 4K LED TV (UA55AU7700RXHE)", price: 180000, category: "Électroménager", image: "tv.jpg" },
+      { id: 58, name: "English Grammar in Use by Raymond Murphy", price: 3000, category: "Language Studies", image: "English Grammar.jfif" },
+      { id: 59, name: "Le Petit Prince by Antoine de Saint-Exupéry", price: 1500, category: "Language Studies", image: "le petit 2.jfif" },
+      { id: 60, name: "Mastering Arabic 1 by Jane Wightwick and Mahmoud Gaafar", price: 6000, category: "Language Studies", image: "Mastering Arabic 1.jfif" },
+      { id: 61, name: "Complete Dutch by Dennis Strik and Gerdi Quist", price: 8000, category: "Language Studies", image: "Complete Dutch.jfif" },
+      { id: 62, name: "Integrated Chinese by Yuehua Liu and Tao-chung Yao", price: 9700, category: "Language Studies", image: "Integrated Chinese.jfif" },
+      { id: 63, name: "Minna no Nihongo", price: 8600, category: "Language Studies", image: "Minna no Nihongo.jfif" },
+      { id: 64, name: "Travel Documents Organizer", price: 2000, category: "Travel & Tourism", image: "Travel Documents Organizer.jfif" },
+      { id: 65, name: "Universal Travel Adapter", price: 2400, category: "Travel & Tourism", image: "Universal Travel Adapter.jfif" },
+      { id: 66, name: "Power Bank", price: 4000, category: "Travel & Tourism", image: "Power Bank.webp" },
+      { id: 67, name: "Packing Cubes", price: 5600, category: "Travel & Tourism", image: "Packing Cubes.jfif" },
+      { id: 68, name: "Travel-Sized Toiletries", price: 750, category: "Travel & Tourism", image: "Travel-Sized Toiletries1.jfif" },
+      { id: 69, name: "Neck Pillow and Eye Mask", price: 1900, category: "Travel & Tourism", image: "Neck Pillow and Eye Mask.jfif" },
+      { id: 70, name: "Reusable Water Bottle", price: 1400, category: "Travel & Tourism", image: "Reusable Water Bottle.jfif" },
+      { id: 71, name: "Quick-Dry Towel", price: 1500, category: "Travel & Tourism", image: "Quick-Dry Towel1.jfif" },
+      { id: 72, name: "Noise-Canceling Headphones", price: 6000, category: "Travel & Tourism", image: "Noise-Canceling Headphones.jfif" },
+      { id: 73, name: "POS System (Point of Sale)", price: 140000, category: "Hospitality Management", image: "POS System (Point of Sale)1.jfif" },
+      { id: 74, name: "Room Service Trays and Carts", price: 20000, category: "Hospitality Management", image: "Room Service Trays and Carts.jfif" },
+      { id: 75, name: "Mini Refrigerators", price: 24000, category: "Hospitality Management", image: "Mini-Bar Refrigerators1.jfif" },
+      { id: 76, name: "Orbita or OEM/ODM E3041", price: 15000, category: "Hospitality Management", image: "orbitra.webp" },
+      { id: 77, name: "Luggage Carts", price: 18000, category: "Hospitality Management", image: "Luggage Carts.jfif" },
+      { id: 78, name: "Energy-Saving Devices", price: 3500, category: "Hospitality Management", image: "Energy-Saving Devices1.jfif" },
+      { id: 79, name: "Plastic Water Tanks 20,000 liters", price: 350000, category: "Hospitality Management", image: "Water-Saving Fixtures.jfif" },
+      { id: 80, name: "Time-Clock Systems", price: 35000, category: "Hospitality Management", image: "Time-Clock Systems1.jfif" },
+      { id: 81, name: "Pool Equipment", price: 22000, category: "Hospitality Management", image: "Pool Equipment1.jfif" },
+      { id: 82, name: "Drafting Table", price: 40000, category: "Architectural Design", image: "Drafting Table.webp" },
+      { id: 83, name: "Architectural Scale Ruler", price: 1900, category: "Architectural Design", image: "Architectural Scale Ruler1.webp" },
+      { id: 84, name: "Technical Pens (Set of 6)", price: 3000, category: "Architectural Design", image: "Technical Pens and Markers.jpg" },
+      { id: 85, name: "Laser Distance Measurer", price: 7400, category: "Architectural Design", image: "Laser Measuring Tool.jfif" },
+      { id: 86, name: "3D Printer", price: 400000, category: "Architectural Design", image: "3D Printer.jpg" },
+      { id: 87, name: "T-Square", price: 2900, category: "Architectural Design", image: "T-Square 1.jfif" },
+      { id: 88, name: "Compass Set", price: 1400, category: "Architectural Design", image: "Compass Set1.webp" },
+      { id: 89, name: "Cutting Mat", price: 3000, category: "Architectural Design", image: "Cutting Mat.webp" },
+      { id: 90, name: "Measuring Tape", price: 600, category: "Architectural Design", image: "Measuring Tape.jpg" },
+      { id: 91, name: "Tool Kit (Basic)", price: 13000, category: "Facility Services", image: "Tool Kit (Basic).jfif" },
+      { id: 92, name: "Power Drill", price: 30000, category: "Facility Services", image: "Power Drill1.jfif" },
+      { id: 93, name: "Ladder (Aluminum)", price: 8000, category: "Facility Services", image: "Ladder (Aluminum).jfif" },
+      { id: 94, name: "Pipe Wrench (Plumbing Tool)", price: 3500, category: "Facility Services", image: "Pipe Wrench and Plumbing Tools.jfif" },
+      { id: 95, name: "Industrial Vacuum Cleaner", price: 25000, category: "Facility Services", image: "Industrial Vacuum Cleaner.jfif" },
+      { id: 96, name: "Floor Scrubber/Polisher", price: 65000, category: "Facility Services", image: "Floor Scrubber.jfif" },
+      { id: 97, name: "Pressure Washer", price: 39000, category: "Facility Services", image: "Pressure Washer.jfif" },
+      { id: 98, name: "Janitorial Cart", price: 17000, category: "Facility Services", image: "Janitorial Cart1.jfif" },
+      { id: 99, name: "Recycling Bins", price: 3000, category: "Facility Services", image: "Recycling Bins.jfif" },
+    ];
+
+    // Function to render products
+    function renderProducts(products) {
+      const productGrid = document.getElementById('productGrid');
+      productGrid.innerHTML = '';
+      products.forEach(product => {
+        const productBox = document.createElement('div');
+        productBox.className = 'product-box';
+        productBox.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.price} da</p>
+          <button onclick="addToBasket(${product.id}, this)">Add to Basket</button>
+        `;
+        productGrid.appendChild(productBox);
+      });
+    }
+
+    // Function to filter products
+    function filterProducts() {
+      const category = document.getElementById('categoryFilter').value;
+      const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+      const priceSort = document.getElementById('priceSort').value;
+
+      let filteredProducts = products.filter(product => {
+        return (category === '' || product.category === category) &&
+               (product.name.toLowerCase().includes(searchQuery));
+      });
+
+      if (priceSort === 'lowToHigh') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+      } else if (priceSort === 'highToLow') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+      }
+
+      renderProducts(filteredProducts);
+    }
+
+    // Event listeners for filtering and sorting
+    document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+    document.getElementById('priceSort').addEventListener('change', filterProducts);
+    document.getElementById('searchBox').addEventListener('input', filterProducts);
+
+    // Basket functionality
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+    function addToBasket(productId, button) {
+      const product = products.find(p => p.id === productId);
+      const basketItem = basket.find(item => item.id === productId);
+      if (basketItem) {
+        basketItem.quantity++;
+      } else {
+        basket.push({ ...product, quantity: 1 });
+      }
+      localStorage.setItem('basket', JSON.stringify(basket));
+      updateBasketCount();
+
+      // Create a flying product clone
+      const productBox = button.closest('.product-box');
+      const productImage = productBox.querySelector('img');
+      const flyingProduct = document.createElement('img');
+      flyingProduct.src = productImage.src;
+      flyingProduct.className = 'flying-product';
+
+      // Position the flying product
+      const productRect = productImage.getBoundingClientRect();
+      flyingProduct.style.left = `${productRect.left}px`;
+      flyingProduct.style.top = `${productRect.top}px`;
+
+      // Append to body and start animation
+      document.body.appendChild(flyingProduct);
+
+      // Remove the flying product after animation
+      setTimeout(() => {
+        flyingProduct.remove();
+      }, 1000);
+    }
+
+    function updateBasketCount() {
+      const totalItems = basket.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('basketCount').textContent = totalItems;
+    }
+
+    // Initial render
+    renderProducts(products);
+    updateBasketCount();
+  </script>
+</body>
+</html>

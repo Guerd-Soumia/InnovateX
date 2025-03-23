@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovateX - Hospitality Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0f3036;
+      --secondary: #ba5036;
+      --accent: #e9c46a;
+      --dark: #264653;
+      --light: #f2d9d0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 50%, #b0c7df 0%, #e9ecef 100%);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      background: linear-gradient(145deg, var(--primary) 0%, #1d7870 100%);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: var(--accent);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .cta-button {
+      background: var(--accent);
+      color: var(--dark);
+      padding: 0.7rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    main {
+      flex: 1;
+      padding: 3rem 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .category-selection {
+      max-width: 90%;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--dark);
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .category-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .category-card {
+      background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: 0.3s;
+      width: 100%;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    .category-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .category-card h3 {
+      color: var(--dark);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-card p {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .category-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .category-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script>
+    function redirectToInput() {
+      window.location.href = 'input.html';
+    }
+  </script>
+</head>
+<body>
+  <nav>
+    <div class="logo">INNOVATEX</div>
+    <a href="private-jobs.html" class="cta-button">Go Back</a>
+  </nav>
+
+  <main>
+    <section class="category-selection">
+      <h2>Hospitality Management</h2>
+      <div class="category-cards">
+        <div class="category-card" onclick="redirectToInput()">
+          <i class="fas fa-hotel"></i>
+          <h3>Hotel Management</h3>
+          <p>Optimize hotel operations and deliver exceptional guest experiences.</p>
+        </div>
+        <div class="category-card" onclick="redirectToInput()">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>Event Planning</h3>
+          <p>Organize and manage events with precision and creativity.</p>
+        </div>
+        <div class="category-card" onclick="redirectToInput()">
+          <i class="fas fa-utensils"></i>
+          <h3>Restaurant Management</h3>
+          <p>Streamline restaurant operations and enhance customer satisfaction.</p>
+        </div>
+        <div class="category-card" onclick="redirectToInput()">
+          <i class="fas fa-globe"></i>
+          <h3>Tourism Development</h3>
+          <p>Strategize and implement tourism growth and sustainability plans.</p>
+        </div>
+        <div class="category-card" onclick="redirectToInput()">
+          <i class="fas fa-headset"></i>
+          <h3>Customer Service</h3>
+          <p>Enhance guest satisfaction through exceptional service.</p>
+        </div>
+        <div class="category-card" onclick="redirectToInput()">
+          <i class="fas fa-broom"></i>
+          <h3>Facility Management</h3>
+          <p>Ensure clean, safe, and efficient hospitality environments.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

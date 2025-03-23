@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovateX - Chemistry</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="section1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Page Styles */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background: #f4f7f6;
+    }
+
+    /* Header (Navigation) */
+    nav {
+      background: #2a2e20;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .cta-button {
+      background: #819453;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .cta-button:hover {
+      background: #6d7c40;
+    }
+
+    /* Main Section */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .category-selection {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .category-cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: nowrap; /* Ensures boxes stay in one row */
+    }
+
+    .category-card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 2rem;
+      width: 300px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .category-card:hover {
+      background: #909680;
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .category-card:hover i,
+    .category-card:hover h3,
+    .category-card:hover p {
+      color: white;
+    }
+
+    .category-card i {
+      font-size: 3rem;
+      color: #19703d;
+      margin-bottom: 1rem;
+    }
+
+    .category-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #34495e;
+    }
+
+    .category-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    footer {
+      background: #2a2e20;
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-content p {
+      margin: 0;
+      font-size: 0.8rem;
+    }
+
+    .footer-content ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.3rem;
+    }
+
+    .footer-content ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    .footer-content ul li a:hover {
+      color: #819453;
+    }
+
+    /* Responsive Fix: Allow wrapping on small screens */
+    @media (max-width: 1000px) {
+      .category-cards {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">InnovateX</div>
+    <a href="physics-chemistry.html" class="cta-button">Go Back</a>
+  </nav>
+
+  <!-- Chemistry Section -->
+  <main>
+    <section class="category-selection">
+      <h2>Chemistry Specializations</h2>
+      <div class="category-cards">
+        <!-- Organic Chemistry Card -->
+        <a href="input.html" class="category-card">
+          <i class="fas fa-leaf"></i>
+          <h3>Organic Chemistry</h3>
+          <p>Study carbon-based compounds and their reactions.</p>
+        </a>
+
+        <!-- Physical Chemistry Card -->
+        <a href="input.html" class="category-card">
+          <i class="fas fa-balance-scale"></i>
+          <h3>Physical Chemistry</h3>
+          <p>Analyze energy and dynamics of chemical systems.</p>
+        </a>
+
+        <!-- Biochemistry Card -->
+        <a href="input.html" class="category-card">
+          <i class="fas fa-dna"></i>
+          <h3>Biochemistry</h3>
+          <p>Explore chemical processes in living organisms.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2023 InnovateX. All rights reserved.</p>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

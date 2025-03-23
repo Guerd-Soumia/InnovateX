@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovateX - Culinary Arts</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Basic Styling */
+    body {
+      background: linear-gradient(135deg, #44540462, #44540463);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      text-align: center;
+    }
+    nav {
+      background: #445404;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo {
+      color: #FFD700;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .cta-button {
+      background: #FFD700;
+      color: #445404;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .category-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+    .category-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1.5rem;
+      border-radius: 15px;
+      width: calc(33.33% - 2rem);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .category-card i {
+      font-size: 2.5rem;
+      color: #445404;
+    }
+    .category-card h3 {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">InnovateX</div>
+    <a href="private-jobs.html" class="cta-button">Go Back</a>
+  </nav>
+
+  <!-- Culinary Specializations -->
+  <h2>Culinary Arts Specializations</h2>
+  <div class="category-cards">
+    <a href="input.html?category=Professional Cooking" class="category-card">
+      <i class="fas fa-utensils"></i>
+      <h3>Professional Cooking</h3>
+    </a>
+    <a href="input.html?category=Food Innovation" class="category-card">
+      <i class="fas fa-seedling"></i>
+      <h3>Food Innovation</h3>
+    </a>
+    <a href="input.html?category=Pastry & Baking" class="category-card">
+      <i class="fas fa-birthday-cake"></i>
+      <h3>Pastry & Baking</h3>
+    </a>
+    <a href="input.html?category=Nutrition Science" class="category-card">
+      <i class="fas fa-apple-alt"></i>
+      <h3>Nutrition Science</h3>
+    </a>
+    <a href="input.html?category=Food Styling" class="category-card">
+      <i class="fas fa-camera-retro"></i>
+      <h3>Food Styling</h3>
+    </a>
+    <a href="input.html?category=Culinary Tourism" class="category-card">
+      <i class="fas fa-globe"></i>
+      <h3>Culinary Tourism</h3>
+    </a>
+    <a href="input.html?category=Restaurant Management" class="category-card">
+      <i class="fas fa-store-alt"></i>
+      <h3>Restaurant Management</h3>
+    </a>
+  </div>
+</body>
+</html>

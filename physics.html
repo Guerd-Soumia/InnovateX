@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovateX - Physics</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="section1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Custom Styles for Physics Page */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background: #f4f7f6;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background: #242b1e;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .cta-button {
+      background: #e74c3c;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .cta-button:hover {
+      background: #c0392b;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .category-selection {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .category-cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: nowrap;
+    }
+
+    @media (max-width: 1024px) {
+      .category-cards {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    .category-card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 2rem;
+      width: 30%;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      background: #879959;
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-card:active {
+      background: #921A40;
+      color: white;
+    }
+
+    .category-card i {
+      font-size: 3rem;
+      color: #e74c3c;
+      margin-bottom: 1rem;
+    }
+
+    .category-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #34495e;
+    }
+
+    .category-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Footer Styles */
+    footer {
+      background: #242b1e;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".category-card").forEach(card => {
+        card.addEventListener("click", function () {
+          window.location.href = "input.html";
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">InnovateX</div>
+    <a href="physics-chemistry.html" class="cta-button">Go Back</a>
+  </nav>
+
+  <!-- Physics Section -->
+  <main>
+    <section class="category-selection">
+      <h2>Physics Specializations</h2>
+      <div class="category-cards">
+        <!-- Quantum Physics Card -->
+        <div class="category-card">
+          <i class="fas fa-microchip"></i>
+          <h3>Quantum Physics</h3>
+          <p>Explore subatomic particles and wave-particle duality.</p>
+        </div>
+
+        <!-- Astrophysics Card -->
+        <div class="category-card">
+          <i class="fas fa-rocket"></i>
+          <h3>Astrophysics</h3>
+          <p>Study celestial bodies and cosmic phenomena.</p>
+        </div>
+
+        <!-- Nuclear Physics Card -->
+        <div class="category-card">
+          <i class="fas fa-radiation"></i>
+          <h3>Nuclear Physics</h3>
+          <p>Investigate atomic nuclei and radioactive processes.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 InnovateX. All rights reserved.</p>
+  </footer>
+</body>
+</html>

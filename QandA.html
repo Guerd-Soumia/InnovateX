@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chatbot - InnovateX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Modern Theme with Updated Color Palette */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #DCD7C9;
+      color: #2C3930;
+      /* Center the chat box */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Ensure the body takes the full viewport height */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+/* Chatbot Container */
+.chatbot-container {
+  max-width: 800px;
+  width: 90%; /* Ensure it doesn't overflow on smaller screens */
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0; /* Remove margin to avoid shifting */
+}
+
+    .chatbot-container h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2C3930;
+    }
+
+    /* Chatbot Messages */
+    .chatbot-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Message Bubbles */
+    .message {
+      max-width: 70%;
+      padding: 0.75rem 1rem;
+      border-radius: 15px;
+      position: relative;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .message.bot {
+      background-color: #3F4F44;
+      color: #DCD7C9;
+      align-self: flex-start;
+    }
+
+    .message.user {
+      background-color: #A27B5C;
+      color: #2C3930;
+      align-self: flex-end;
+    }
+
+    /* Chatbot Input */
+    .chatbot-input {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .chatbot-input input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid #2C3930;
+      border-radius: 10px;
+      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #2C3930;
+    }
+
+    .chatbot-input button {
+      padding: 0.75rem 1.5rem;
+      background-color: #3F4F44;
+      color: #DCD7C9;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-input button:hover {
+      background-color: #2C3930;
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #214338;
+      color: #ddece2;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button:hover {
+      background-color: #315e50b7;
+      transform: scale(1.1);
+    }
+
+    /* Question List Button */
+    .question-list-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #E9C46A;
+      color: #2C3930;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .question-list-button:hover {
+      background-color: #F4A261;
+      transform: scale(1.1);
+    }
+
+    /* Question List Modal */
+    .question-list-modal {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: #FFF;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      width: 300px;
+      z-index: 1000;
+    }
+
+    .question-list-modal h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #2C3930;
+    }
+
+    .question-list-modal ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .question-list-modal ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .question-list-modal ul li a {
+      color: #2C3930;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .question-list-modal ul li a:hover {
+      color: #A27B5C;
+    }
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
+      .chatbot-container {
+        padding: 1rem;
+      }
+
+      .chatbot-container h1 {
+        font-size: 1.75rem;
+      }
+
+      .message {
+        max-width: 90%;
+      }
+
+      .question-list-modal {
+        width: 90%;
+        right: 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Chatbot Section -->
+  <section class="chatbot-container">
+    <h1>AI Chatbot - InnovateX</h1>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <!-- Bot Introduction Message -->
+      <div class="message bot">
+        Hi! I'm the InnovateX AI Assistant. How can I help you today? Feel free to ask me anything about InnovateX!
+      </div>
+    </div>
+    <!-- Chatbot Input -->
+    <div class="chatbot-input">
+      <input type="text" id="user-input" placeholder="Type your question here...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </section>
+
+  <!-- Back Button -->
+  <button class="back-button" onclick="scrollToTop()">←</button>
+  
+  <!-- Question List Button -->
+  <button class="question-list-button" onclick="toggleQuestionList()">?</button>
+
+  <!-- Question List Modal -->
+  <div class="question-list-modal" id="question-list-modal">
+    <h3>Questions List</h3>
+    <ul id="question-list">
+      <!-- Questions will be dynamically added here -->
+    </ul>
+  </div>
+
+  <script>
+    // Predefined Q&A with 70 Questions and Answers
+    const qa = [
+      { question: "What is InnovateX?", answer: "InnovateX is a platform designed to connect professionals, entrepreneurs, and investors to collaborate, learn, and grow their businesses." },
+      { question: "Who can benefit from using InnovateX?", answer: "Entrepreneurs, investors, professionals, and anyone looking to network, learn, or grow their business can benefit from InnovateX." },
+      { question: "What industries does InnovateX focus on?", answer: "InnovateX focuses on a wide range of industries, including technology, healthcare, finance, education, and more." },
+      { question: "Is InnovateX free to use, or are there subscription fees?", answer: "InnovateX offers both free and premium subscription plans. The free plan includes basic features, while the premium plan provides advanced tools and resources." },
+      { question: "How do I create an account on InnovateX?", answer: "You can create an account by visiting the InnovateX website and clicking on the 'Sign Up' button. Follow the prompts to complete your registration." },
+      { question: "How do I search for job opportunities on InnovateX?", answer: "You can search for job opportunities by using the 'Jobs' section on the platform. Filter results by industry, location, or job type to find relevant listings." },
+      { question: "Can I post my project to attract investors on InnovateX?", answer: "Yes, you can post your project in the 'Projects' section to attract potential investors. Make sure to provide detailed information about your project." },
+      { question: "How do I find investors for my startup or project?", answer: "You can use the 'Investors' section to search for investors who are interested in your industry. You can also post your project to attract investors." },
+      { question: "What kind of educational resources are available in the E-learning section?", answer: "The E-learning section offers courses, tutorials, webinars, and certifications on various topics, including business, technology, and personal development." },
+      { question: "How does the InnovateX Market work, and what can I buy there?", answer: "The InnovateX Market is a marketplace where users can buy and sell products or services. You can find tools, software, consulting services, and more." },
+      { question: "Can I collaborate with other users on InnovateX? How?", answer: "Yes, you can collaborate with other users by joining or creating groups, participating in discussions, or messaging them directly." },
+      { question: "How do I find sponsors for my project or business?", answer: "You can find sponsors by posting your project in the 'Sponsors' section and reaching out to potential sponsors directly." },
+      { question: "What is the Elite Talent Network, and how can I join it?", answer: "The Elite Talent Network is a community of top professionals and experts. You can join by applying through the 'Elite Talent' section on the platform." },
+      { question: "How do I access the InnovateX E-Shop, and what products are available?", answer: "You can access the E-Shop by clicking on the 'Market' tab. It offers a variety of products, including software, tools, and consulting services." },
+      { question: "Are there any certifications or courses available in the E-learning section?", answer: "Yes, the E-learning section offers certifications and courses on various topics, including business, technology, and personal development." },
+      { question: "How do I reset my password if I forget it?", answer: "You can reset your password by clicking on the 'Forgot Password' link on the login page and following the instructions." },
+      { question: "How do I update my profile information?", answer: "You can update your profile information by navigating to the 'Profile' section and clicking on 'Edit Profile.'" },
+      { question: "Is my data safe on InnovateX? What security measures are in place?", answer: "Yes, InnovateX uses advanced security measures, including encryption and secure servers, to protect your data." },
+      { question: "How do I delete my InnovateX account?", answer: "You can delete your account by going to the 'Account Settings' section and selecting 'Delete Account.'" },
+      { question: "Why am I having trouble logging into my account?", answer: "If you're having trouble logging in, ensure you're using the correct email and password. If the issue persists, reset your password or contact support." },
+      { question: "How can I connect with other professionals on InnovateX?", answer: "You can connect with other professionals by joining groups, participating in discussions, or sending connection requests." },
+      { question: "Can I message other users directly on the platform?", answer: "Yes, you can message other users directly by visiting their profile and clicking on the 'Message' button." },
+      { question: "How do I join or create a collaboration group?", answer: "You can join or create a collaboration group by navigating to the 'Groups' section and following the prompts." },
+      { question: "Are there any networking events or webinars hosted by InnovateX?", answer: "Yes, InnovateX regularly hosts networking events and webinars. Check the 'Events' section for upcoming events." },
+      { question: "How do I find like-minded individuals or organizations to work with?", answer: "You can find like-minded individuals or organizations by using the search feature or joining relevant groups." },
+      { question: "How do I pitch my project to investors on InnovateX?", answer: "You can pitch your project by posting it in the 'Projects' section and reaching out to investors directly." },
+      { question: "What criteria do investors use to select projects on InnovateX?", answer: "Investors typically look for projects with strong potential, a clear business plan, and a capable team." },
+      { question: "Can I invest in other projects on InnovateX? How?", answer: "Yes, you can invest in other projects by browsing the 'Projects' section and contacting the project owners." },
+      { question: "Are there any fees for using the investor search feature?", answer: "No, the investor search feature is free to use for all users." },
+      { question: "How do I know if an investor is legitimate on InnovateX?", answer: "InnovateX verifies all investors on the platform. You can also check their profile and reviews for more information." },
+      { question: "What topics are covered in the E-learning courses?", answer: "The E-learning courses cover a wide range of topics, including business, technology, marketing, and personal development." },
+      { question: "Are the courses free, or do I need to pay for them?", answer: "Some courses are free, while others require payment. Check the course details for more information." },
+      { question: "Can I earn certifications through InnovateX E-learning?", answer: "Yes, you can earn certifications by completing courses and passing the required exams." },
+      { question: "How do I access the course materials after enrolling?", answer: "You can access course materials by navigating to the 'My Courses' section in your account." },
+      { question: "Are there any live classes or only pre-recorded content?", answer: "InnovateX offers both live classes and pre-recorded content. Check the course details for more information." },
+      { question: "What types of products or services are available in the E-Shop?", answer: "The E-Shop offers a variety of products and services, including software, tools, and consulting services." },
+      { question: "Can I sell my own products or services on InnovateX Market?", answer: "Yes, you can sell your products or services by creating a listing in the 'Market' section." },
+      { question: "How do I make a purchase in the InnovateX E-Shop?", answer: "You can make a purchase by browsing the E-Shop, selecting a product, and completing the checkout process." },
+      { question: "Are there any discounts or promotions in the InnovateX Market?", answer: "Yes, InnovateX occasionally offers discounts and promotions. Check the 'Market' section for current deals." },
+      { question: "What payment methods are accepted in the InnovateX Market?", answer: "InnovateX accepts various payment methods, including credit cards, PayPal, and bank transfers." },
+      { question: "How does InnovateX protect my personal information?", answer: "InnovateX uses advanced security measures, including encryption and secure servers, to protect your personal information." },
+      { question: "Can I control who sees my profile or projects on InnovateX?", answer: "Yes, you can adjust your privacy settings to control who sees your profile or projects." },
+      { question: "Does InnovateX share my data with third parties?", answer: "No, InnovateX does not share your data with third parties without your consent." },
+      { question: "How do I report a security issue or suspicious activity on the platform?", answer: "You can report security issues or suspicious activity by contacting InnovateX support." },
+      { question: "Where can I read InnovateX's Privacy Policy?", answer: "You can read the Privacy Policy by clicking on the 'Privacy Policy' link in the footer." },
+      { question: "How do I contact InnovateX support for help?", answer: "You can contact InnovateX support by visiting the 'Contact' page or sending an email to support@innovatex.com." },
+      { question: "Is there a FAQ section or help center on InnovateX?", answer: "Yes, InnovateX has a FAQ section and help center where you can find answers to common questions." },
+      { question: "How do I provide feedback or suggestions for improving InnovateX?", answer: "You can provide feedback or suggestions by visiting the 'Feedback' section on the platform." },
+      { question: "Are there any community forums or discussion boards on InnovateX?", answer: "Yes, InnovateX has community forums and discussion boards where users can interact and share ideas." },
+      { question: "How do I report a bug or technical issue on the website?", answer: "You can report bugs or technical issues by contacting InnovateX support or using the 'Report Issue' feature." },
+      { question: "How can I stay updated on InnovateX news and updates?", answer: "You can stay updated by subscribing to the InnovateX newsletter or following their social media accounts." },
+      { question: "Does InnovateX have a newsletter I can subscribe to?", answer: "Yes, you can subscribe to the InnovateX newsletter by visiting the 'Newsletter' section on the platform." },
+      { question: "Where can I follow InnovateX on social media?", answer: "You can follow InnovateX on social media by visiting their official profiles on platforms like LinkedIn, Twitter, and Facebook." },
+      { question: "Are there any upcoming events or webinars hosted by InnovateX?", answer: "Yes, InnovateX regularly hosts events and webinars. Check the 'Events' section for upcoming events." },
+      { question: "How do I share my InnovateX profile or projects on social media?", answer: "You can share your profile or projects by using the 'Share' button on your profile or project page." },
+      { question: "How can my organization partner with InnovateX?", answer: "You can partner with InnovateX by contacting their partnership team through the 'Contact' page." },
+      { question: "What are the benefits of becoming a sponsor on InnovateX?", answer: "Sponsors gain visibility, access to a large network, and opportunities to support innovative projects." },
+      { question: "How do I apply for sponsorship for my project or business?", answer: "You can apply for sponsorship by submitting a proposal through the 'Sponsors' section on the platform." },
+      { question: "Are there any requirements to become a sponsor on InnovateX?", answer: "Yes, sponsors must meet certain criteria, including a proven track record and a commitment to innovation." },
+      { question: "How do I contact InnovateX for partnership opportunities?", answer: "You can contact InnovateX for partnership opportunities by visiting the 'Contact' page." },
+      { question: "Is InnovateX accessible for users with disabilities?", answer: "Yes, InnovateX is committed to accessibility and provides features to support users with disabilities." },
+      { question: "Does InnovateX support multiple languages?", answer: "Yes, InnovateX supports multiple languages. You can change the language settings in your account." },
+      { question: "How do I change the language settings on InnovateX?", answer: "You can change the language settings by navigating to the 'Settings' section in your account." },
+      { question: "Is there a mobile app for InnovateX, or is it only a website?", answer: "InnovateX is currently available as a website, but a mobile app is in development." },
+      { question: "How do I enable dark mode on InnovateX?", answer: "You can enable dark mode by navigating to the 'Settings' section and selecting 'Dark Mode.'" },
+      { question: "Where can I read InnovateX's Terms of Service?", answer: "You can read the Terms of Service by clicking on the 'Terms of Service' link in the footer." },
+      { question: "What are the rules for posting projects or job opportunities on InnovateX?", answer: "You must follow InnovateX's guidelines, which include providing accurate information and avoiding spam." },
+      { question: "Can I use InnovateX for commercial purposes?", answer: "Yes, InnovateX can be used for commercial purposes, such as finding investors or posting job opportunities." },
+      { question: "What happens if I violate InnovateX's terms or policies?", answer: "Violating InnovateX's terms or policies may result in account suspension or termination." },
+      { question: "How do I report inappropriate content or behavior on InnovateX?", answer: "You can report inappropriate content or behavior by using the 'Report' feature or contacting support." }
+    ];
+
+    // Function to toggle the question list modal
+    function toggleQuestionList() {
+      const modal = document.getElementById("question-list-modal");
+      modal.style.display = modal.style.display === "block" ? "none" : "block";
+    }
+
+    // Function to populate the question list
+    function populateQuestionList() {
+      const questionList = document.getElementById("question-list");
+      qa.forEach((item, index) => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `<a href="#" onclick="sendQuestion(${index})">${index + 1}. ${item.question}</a>`;
+        questionList.appendChild(listItem);
+      });
+    }
+
+    // Function to send a question automatically
+    function sendQuestion(index) {
+      const userInput = document.getElementById("user-input");
+      const chatbotMessages = document.getElementById("chatbot-messages");
+
+      // Add user message
+      const userMessage = document.createElement("div");
+      userMessage.classList.add("message", "user");
+      userMessage.textContent = qa[index].question;
+      chatbotMessages.appendChild(userMessage);
+
+      // Add bot response
+      const botMessage = document.createElement("div");
+      botMessage.classList.add("message", "bot");
+      botMessage.textContent = qa[index].answer;
+      chatbotMessages.appendChild(botMessage);
+
+      // Clear input
+      userInput.value = "";
+
+      // Scroll to bottom
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+      // Close the modal
+      toggleQuestionList();
+    }
+
+    // Function to send a message
+    function sendMessage() {
+      const userInput = document.getElementById("user-input").value.trim();
+      const chatbotMessages = document.getElementById("chatbot-messages");
+
+      // Add user message
+      const userMessage = document.createElement("div");
+      userMessage.classList.add("message", "user");
+      userMessage.textContent = userInput;
+      chatbotMessages.appendChild(userMessage);
+
+      // Check if the input is a number
+      const questionNumber = parseInt(userInput);
+      if (!isNaN(questionNumber)) {
+        const questionIndex = questionNumber - 1;
+        if (questionIndex >= 0 && questionIndex < qa.length) {
+          // Add bot response with the answer
+          const botMessage = document.createElement("div");
+          botMessage.classList.add("message", "bot");
+          botMessage.textContent = qa[questionIndex].answer;
+          chatbotMessages.appendChild(botMessage);
+        } else {
+          // Invalid question number
+          const botMessage = document.createElement("div");
+          botMessage.classList.add("message", "bot");
+          botMessage.textContent = "Sorry, I couldn't find that question. Please try again.";
+          chatbotMessages.appendChild(botMessage);
+        }
+      } else {
+        // Analyze free-text question
+        const botMessage = document.createElement("div");
+        botMessage.classList.add("message", "bot");
+        botMessage.textContent = analyzeQuestion(userInput);
+        chatbotMessages.appendChild(botMessage);
+      }
+
+      // Clear input
+      document.getElementById("user-input").value = "";
+
+      // Scroll to bottom
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Function to analyze free-text questions by keywords
+    function analyzeQuestion(userInput) {
+      const keywords = userInput.toLowerCase().split(" ");
+      for (const item of qa) {
+        const questionKeywords = item.question.toLowerCase().split(" ");
+        if (keywords.some(keyword => questionKeywords.includes(keyword))) {
+          return item.answer;
+        }
+      }
+      return "I'm sorry, I couldn't find an answer to your question. Can you please rephrase or try another question?";
+    }
+
+    // Function to scroll to the top of the page
+    function scrollToTop() {
+        window.history.back();
+    }
+
+    // Populate the question list on page load
+    populateQuestionList();
+  </script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join a Class - InnovateX</title>
+    <!-- Add Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Updated Color Palette */
+        :root {
+            --primary: #27391C;   /* Deep Green */
+            --secondary: #23311e; /* Muted Green */
+            --accent: #c8e6c998;  /* Light Green */
+            --light: #F1F8E9;     /* Very Light Green */
+            --text: #27391C;      /* Dark Green for Text */
+            --yellow: #FFD700;    /* Yellow for the Icon */
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            width: 100%;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .go-back-button {
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .go-back-button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Form Container Styles */
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            font-size: 1rem;
+            color: var(--text);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-container input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-container input:read-only {
+            background-color: #f9f9f9;
+            cursor: not-allowed;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Payment Instructions Section */
+        .payment-instructions {
+            background-color: var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .payment-instructions h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .payment-instructions p {
+            color: var(--text);
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .payment-instructions strong {
+            color: var(--secondary);
+        }
+
+        /* Footer Message */
+        .footer-message {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        /* How to Purchase Button */
+        .how-to-purchase-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--yellow);
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-decoration: none;
+            margin: 1rem auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .how-to-purchase-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .how-to-purchase-button i {
+            font-size: 1.5rem;
+        }
+
+        /* Tooltip for How to Purchase Button */
+        .how-to-purchase-tooltip {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .how-to-purchase-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #4B5945;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the button */
+            left: 50%;
+            margin-left: -100px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .how-to-purchase-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Baridimob Account Input Wrapper */
+        .baridimob-input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            background-color: white;
+        }
+
+        .baridimob-input-wrapper .fixed-part {
+            background-color: #f9f9f9;
+            padding: 0.75rem;
+            border-right: 1px solid var(--accent);
+            color: var(--text);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .baridimob-input-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: var(--text);
+            background-color: white;
+        }
+
+        .baridimob-input-wrapper input::placeholder {
+            color: #ccc;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            // Populate course and price from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            document.getElementById('course').value = urlParams.get('course') || '';
+            document.getElementById('price').value = urlParams.get('price') || '';
+
+            // Add input restrictions for Baridimob account
+            const baridimobInput = document.getElementById('baridimob');
+            baridimobInput.addEventListener('input', function (e) {
+                // Allow only numbers
+                e.target.value = e.target.value.replace(/\D/g, '');
+
+                // Limit to 10 digits
+                if (e.target.value.length > 10) {
+                    e.target.value = e.target.value.slice(0, 10);
+                }
+            });
+
+            // Validate Baridimob account on form submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (e) {
+                const baridimobValue = baridimobInput.value.replace(/\s/g, ''); // Remove spaces
+                if (baridimobValue.length !== 10) {
+                    e.preventDefault();
+                    alert('Baridimob account must be exactly 10 digits long.');
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">InnovateX</a>
+            <a href="formations.html" class="go-back-button">Go Back</a>
+        </div>
+    </header>
+
+    <!-- Form Container -->
+    <div class="form-container">
+        <h1>Join Our Class</h1>
+        <form action="https://usebasin.com/f/1b996065088f" method="POST">
+            <!-- Full Name -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <!-- Email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <!-- Baridimob Account -->
+            <label for="baridimob">Baridimob Account:</label>
+            <div class="baridimob-input-wrapper">
+                <span class="fixed-part">0079999900</span>
+                <input type="text" id="baridimob" name="baridimob" placeholder="XXXXXXXXXX" required>
+            </div>
+
+            <!-- Selected Course -->
+            <label for="course">Selected Course:</label>
+            <input type="text" id="course" name="course" readonly>
+
+            <!-- Price -->
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" readonly>
+
+            <!-- Payment Instructions -->
+            <div class="payment-instructions">
+                <h2>Payment Instructions</h2>
+                <p>Please send the payment to the following Baridimob account:</p>
+                <p><strong>0079999900 1234567890</strong></p>
+                <p>Once your payment is verified, we will confirm your enrollment in the class.</p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Join the Class</button>
+
+            <!-- How to Purchase Button -->
+            <div class="how-to-purchase-tooltip">
+                <a href="https://www.poste.dz/page/virementCC" target="_blank" class="how-to-purchase-button">
+                    <i class="fas fa-question"></i> <!-- Font Awesome Question Mark Icon -->
+                </a>
+                <span class="tooltip-text">Follow these steps to purchase the course (Payer la Formation):<br>1. Click this button.<br>2. Complete the payment process.<br>3. Return to this page to confirm.</span>
+            </div>
+        </form>
+
+        <!-- Footer Message -->
+        <div class="footer-message">
+            <p>If you have any questions, please contact us at <strong>innovatex063@gmail.com</strong>.</p>
+        </div>
+    </div>
+</body>
+</html>
